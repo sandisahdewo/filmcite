@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const state = {
   film: {},
+  films: [],
   quotes: {},
   lastQuote: {},
   total: {
@@ -24,8 +25,8 @@ const mutations = {
    * Get 3 latest films from database
    * @param {[object]} state 
    */
-  setLatestFilms (state, films) {
-    state.latestFilms = films
+  setFilms (state, films) {
+    state.films = films
   },
 
   setFilm (state, film) {
@@ -46,15 +47,15 @@ const actions = {
     commit('setFilm', film)
   },
 
-  getLatestFilms ({ commit }) {
+  getFilms ({ commit }) {
     axios.get('/latest')
       .then(response => {
-        commit('setLatestFilms', response.data)
+        commit('setFilms', response.data)
       }).catch(e => console.error(e))
   },
 
   getLatestQuote ({ commit }) {
-    axios.get('/quote/latest')
+    axios.get('/quote/random')
       .then(response => {
         commit('setLastQuote', response.data)
       }).catch(e => console.error(e))

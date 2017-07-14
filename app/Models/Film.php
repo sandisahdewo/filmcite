@@ -45,6 +45,7 @@ class Film extends Model
     protected $appends = [
         'poster_url',
         'year',
+        'film_url',
     ];
 
     public function sluggable()
@@ -71,5 +72,15 @@ class Film extends Model
         }
 
         return null;
+    }
+
+    public function getFilmUrlAttribute()
+    {
+        return route('film.view', [$this->attributes['slug']]);
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
     }
 }

@@ -30,8 +30,7 @@
     },
 
     computed: mapState({
-      film: state => state.film,
-      latestFilms: state => state.latestFilms
+      film: state => state.film
     })
   }
 </script>

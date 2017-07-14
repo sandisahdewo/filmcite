@@ -3,7 +3,7 @@
       <h1>Find Quotes on Films</h1>
       <blockquote v-if="lastQuote.quote">
         <p>"{{ lastQuote.quote }}"</p>
-        <footer>{{ lastQuote.name }} - <cite>{{ lastQuote.title }}</cite></footer>
+        <footer>{{ lastQuote.role }} - <cite><a :href="lastQuote.film.film_url">{{ lastQuote.film.title }}</a></cite></footer>
       </blockquote>
       
       <v-autocomplete 

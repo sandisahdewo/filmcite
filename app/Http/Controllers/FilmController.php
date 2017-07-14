@@ -20,7 +20,7 @@ class FilmController extends Controller
 
     public function search(Request $request): \Illuminate\Http\JsonResponse
     {
-        $films = Film::select('id', 'title', 'film_id', 'description', 'released_at')
+        $films = Film::select('id', 'slug', 'title', 'film_id', 'description', 'released_at')
             ->orderBy('title', 'ASC')
             ->when($request->title, function ($query) use ($request) {
                 return $query->where('title', 'LIKE', '%' . $request->title . '%');
@@ -41,6 +41,54 @@ class FilmController extends Controller
             ], 404);
         }
 
+        $this->fetchRest($film);
+
+        return response()->json($film);
+    }
+
+    public function view($slug): \Illuminate\View\View
+    {
+        $film = Film::whereSlug($slug)
+            ->with('quotes')
+            ->first();
+
+        abort_if(empty($film), 404, 'Film not found.');
+
+        $this->fetchRest($film);
+
+        return view('movie.view', compact('film'));
+    }
+
+    public function random(): \Illuminate\View\View
+    {
+        return view('movie.view', compact('movie'));
+    }
+
+    public function latest(): \Illuminate\Http\JsonResponse
+    {
+        $films = Film::take(3)
+            ->where('description', '!=', '')
+            ->where('poster', '!=', '')
+            ->where('is_adult', false)
+            ->inRandomOrder()
+            ->withCount('quotes')
+            ->get();
+
+        return response()->json($films);
+    }
+
+    public function total()
+    {
+        $total = Film::count();
+
+        return response()->json([
+            'number' => $total,
+            'string' => number_format($total, 0, ',', '.'),
+        ]);
+    }
+
+    private function fetchRest($film)
+    {
         if (empty($film->description)) {
             $client = new Client([
                 'base_uri' => config('services.TMDB.url'),
@@ -66,7 +114,7 @@ class FilmController extends Controller
             // decode data from TheMovieDatabase
             $body = json_decode((string) $response->getbody());
 
-            DB::transaction(function () use ($film, $body) {
+            $film = DB::transaction(function () use ($film, $body) {
                 // update local database
                 $film->imdb_id = $body->imdb_id;
                 $film->description = $body->overview;
@@ -100,42 +148,8 @@ class FilmController extends Controller
                     ]);
                 }
             });
+
+            return $film;
         }
-
-        return response()->json($film);
-    }
-
-    public function view($slug): \Illuminate\View\View
-    {
-        $film = Film::whereSlug($slug)->first();
-        abort_if(empty($film), 404, 'Film not found.');
-
-        return view('movie.view', compact('film'));
-    }
-
-    public function random(): \Illuminate\View\View
-    {
-        return view('movie.view', compact('movie'));
-    }
-
-    public function latest(): \Illuminate\Http\JsonResponse
-    {
-        $films = Film::take(3)
-            ->where('description', '!=', '')
-            ->where('poster', '!=', '')
-            ->inRandomOrder()
-            ->get();
-
-        return response()->json($films);
-    }
-
-    public function total()
-    {
-        $total = Film::count();
-
-        return response()->json([
-            'number' => $total,
-            'string' => number_format($total, 0, ',', '.'),
-        ]);
     }
 }

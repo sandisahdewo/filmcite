@@ -18,11 +18,11 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a href="{{ route('movie.index') }}" class="title">{{ config('app.name') }}</a>
+				<a href="{{ route('film.index') }}" class="title">{{ config('app.name') }}</a>
 				<nav>
 					<ul>
-						<li><a href="{{ route('movie.index') }}"> <i class="fa fa-home fa-fw"></i> Back to Home</a></li>
-						<li><a href="{{ route('movie.random') }}">View Random Movie</a></li>
+						<li><a href="{{ route('film.index') }}"> <i class="fa fa-home fa-fw"></i> Back to Home</a></li>
+						<li><a href="{{ route('film.random') }}">View Random Movie</a></li>
 					</ul>
 				</nav>
 			</header>

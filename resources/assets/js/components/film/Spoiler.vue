@@ -1,6 +1,10 @@
 <template>
   <div v-if="! isEmpty(film)" class="inner">
-    <h2>{{ film.title }} <span v-if="film.year">({{ film.year }})</span></h2>
+    <h2>
+      <a :href="film.film_url">
+        {{ film.title }} <span v-if="film.year">({{ film.year }})</span>
+      </a>
+    </h2>
     <div class="row">
       <div class="col-md-12">
         <img v-if="film.poster_url" :src="film.poster_url" class="image left small" :alt="film.title">

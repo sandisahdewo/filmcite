@@ -17,4 +17,14 @@ class Quote extends Model
         'film_id' => 'integer',
         'user_id' => 'integer',
     ];
+
+    public function film()
+    {
+        return $this->belongsTo(Film::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\User::class);
+    }
 }
