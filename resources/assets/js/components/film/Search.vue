@@ -1,6 +1,11 @@
 <template>
   <div class="inner">
-      <h1>Find Quotes on Films</h1>
+      <p>
+        <div class="fb-like" data-href="https://www.filmcite.com" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
+      </p>
+      <h1>
+        Find Quotes on Films
+      </h1>
       <blockquote v-if="lastQuote.quote">
         <p>"{{ lastQuote.quote }}"</p>
         <footer>{{ lastQuote.role }} - <cite><a :href="lastQuote.film.film_url">{{ lastQuote.film.title }}</a></cite></footer>

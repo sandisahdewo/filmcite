@@ -20,6 +20,7 @@
 			@endif
 		</h1>
 
+
 		@if (! empty($film->poster))
 			<span class="image left img-responsive"><img src="{{ $film->poster_url }}" alt="{{ $film->title }}" /></span>
 		@endif

@@ -5,6 +5,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
+
+		<meta property="fb:app_id" content="484026278602158">
 		@stack('metadata')
 
 		<!--[if lte IE 8]><script src="{{ asset('js/ie/html5shiv.js') }}"></script><![endif]-->
@@ -15,6 +17,8 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="{{ asset('css/ie9.css') }}" /><![endif]-->
 	</head>
 	<body>
+
+	@include('layouts.partials.facebook')
 
 		<!-- Header -->
 			<header id="header">

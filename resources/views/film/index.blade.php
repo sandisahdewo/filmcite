@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 
+		<meta property="fb:app_id" content="484026278602158">
 		<meta property="og:title" content="{{ config('app.name') }}">
 		<meta property="og:description" content="{{ config('app.description') }}">
 		<meta property="og:url" content="{{ url()->current() }}">
@@ -20,6 +21,7 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="{{ asset('css/ie9.css') }}" /><![endif]-->
 	</head>
 	<body>
+		@include('layouts.partials.facebook')
 
 		<div id="app">
 			<!-- Sidebar -->
