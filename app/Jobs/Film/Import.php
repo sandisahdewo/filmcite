@@ -47,7 +47,7 @@ class Import implements ShouldQueue
 
         $film->save();
 
-        if ($film->adult) {
+        if ($this->film->adult) {
             $genre = Genre::firstOrCreate(['title' => 'Adult']);
 
             FilmGenre::insert([
