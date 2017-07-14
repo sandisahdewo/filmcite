@@ -17,7 +17,15 @@ window.Vue = require('vue');
  * such as zero-config time-travel debugging and state snapshot export / import.
  */
 
+
 import store from './vuex/store';
+
+/**
+ * A simple Vue component for handling Google Ads
+ */
+
+import VueAdsense from 'vue-adsense';
+Vue.component('adsense', VueAdsense);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

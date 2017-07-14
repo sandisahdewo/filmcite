@@ -3,13 +3,9 @@
       <p>
         <div class="fb-like" data-href="https://www.filmcite.com" data-layout="button_count" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
       </p>
-      <h1>
-        Find Quotes on Films
-      </h1>
-      <blockquote v-if="lastQuote.quote">
-        <p>"{{ lastQuote.quote }}"</p>
-        <footer>{{ lastQuote.role }} - <cite><a :href="lastQuote.film.film_url">{{ lastQuote.film.title }}</a></cite></footer>
-      </blockquote>
+      <h2>
+        Get Inspirational Quotes from Films
+      </h2>
       
       <v-autocomplete 
         :items="films"
@@ -55,8 +51,6 @@
           this.$store.commit('setTotalFilm', response.data)
         })
         .catch(e => console.error(e))
-
-        this.$store.dispatch('getLatestQuote')
     },
 
     methods: {
@@ -94,8 +88,7 @@
     },
 
     computed: mapState({
-      total: state => state.total,
-      lastQuote: state => state.lastQuote
+      total: state => state.total
     })
   }
 
@@ -105,6 +98,10 @@
   p.loading {
     font-size: 1.3em;
     margin-top: 30px;
+  }
+
+  blockquote {
+    margin-top: 20px;
   }
 </style>
 

@@ -16,7 +16,8 @@
     "jquery": "^3.1.1",
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.1.10",
+    "vue-adsense": "^1.0.1"
   },
   "dependencies": {
     "v-autocomplete": "^1.4.1",
