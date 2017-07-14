@@ -12,7 +12,7 @@
         :get-label="getLabel"
         :component-item='template'
         input-class="form-control"
-        :placeholder="'Search from ' + total.string + ' total films...'"
+        :placeholder="'Search from ' + total.string + ' films and TV series...'"
         @update-items="updateItems"
         @item-selected="getFilm"
       >

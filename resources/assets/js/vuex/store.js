@@ -7,8 +7,6 @@ Vue.use(Vuex)
 
 const state = {
   film: {},
-  latestFilms: [],
-  spoiler: {},
   quotes: {},
   lastQuote: {},
   total: {
@@ -32,10 +30,6 @@ const mutations = {
 
   setFilm (state, film) {
     state.film = film
-  },
-
-  submitSpoiler (state, spoiler) {
-    state.spoiler = spoiler
   },
 
   setTotalFilm (state, total) {

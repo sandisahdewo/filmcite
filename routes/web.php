@@ -12,6 +12,7 @@
  */
 
 Route::get('/quote/latest', 'QuoteController@latest')->name('quote.latest');
+Route::post('/submit', 'QuoteController@create')->name('quote.create');
 
 Route::get('/', 'FilmController@index')->name('film.index');
 Route::get('/search', 'FilmController@search')->name('film.search');

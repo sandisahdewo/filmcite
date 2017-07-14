@@ -2,15 +2,15 @@
   <div class="inner">
     <nav>
       <ul>
-        <li><a href="#intro">Find a Movie</a></li>
+        <li><a href="#search">Find a Movie</a></li>
         <li>
-          <a href="#spoiler">
+          <a href="#quote">
             Quote Me!<br>
             <span v-if="film.title">{{ film.title }}</span>
           </a>
         </li>
         <li><a href="#latest">Latest Quotes Movie</a></li>
-        <li><a href="#submit-spoiler">Submit Quote</a></li>
+        <li><a href="#submit">Submit Quote</a></li>
       </ul>
     </nav>
   </div>

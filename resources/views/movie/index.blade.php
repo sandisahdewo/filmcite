@@ -31,12 +31,12 @@
 			<div id="wrapper">
 
 				<!-- Intro -->
-				<section id="intro" class="wrapper style1 fullscreen fade-up">
+				<section id="search" class="wrapper style1 fullscreen fade-up">
 					<film-search></film-search>
 				</section>
 
 				<!-- Two -->
-				<section id="spoiler" class="wrapper style3 fade-up">
+				<section id="quote" class="wrapper style3 fade-up">
 					<film-spoiler></film-spoiler>
 				</section>
 
@@ -44,7 +44,7 @@
 				<film-latest></film-latest>
 
 				<!-- Three -->
-				<section id="submit-spoiler" class="wrapper style1 fade-up">
+				<section id="submit" class="wrapper style1 fade-up">
 					<form-spoiler></form-spoiler>
 				</section>
 

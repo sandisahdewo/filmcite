@@ -29673,6 +29673,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(2);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29712,14 +29719,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'FormSpoiler',
+  name: 'FormQuote',
 
   data: function data() {
     return {
-      film: {}
+      errors: [],
+      loading: false,
+      model: {
+        film_id: 1,
+        name: '',
+        quote: ''
+      }
     };
-  }
+  },
+
+
+  methods: {
+    create: function create(e) {
+      var _this = this;
+
+      this.loading = true;
+
+      axios.post(e.target.action, this.model).then(function (response) {
+        _this.model = {
+          film_id: 0,
+          name: '',
+          quote: ''
+        };
+
+        _this.loading = false;
+      }).catch(function (e) {
+        if (e) {
+          if (e.response.status == 422) {
+            _this.errors = e.response.data.validations;
+          }
+        }
+
+        _this.loading = false;
+      });
+    }
+  },
+
+  computed: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    film: function film(state) {
+      return state.film;
+    }
+  })
 });
 
 /***/ }),
@@ -30041,8 +30089,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 var state = {
   film: {},
-  latestFilms: [],
-  spoiler: {},
   quotes: {},
   lastQuote: {},
   total: {
@@ -30063,9 +30109,6 @@ var mutations = {
   },
   setFilm: function setFilm(state, film) {
     state.film = film;
-  },
-  submitSpoiler: function submitSpoiler(state, spoiler) {
-    state.spoiler = spoiler;
   },
   setTotalFilm: function setTotalFilm(state, total) {
     state.total = total;
@@ -30622,7 +30665,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "get-label": _vm.getLabel,
       "component-item": _vm.template,
       "input-class": "form-control",
-      "placeholder": 'Search from ' + _vm.total.string + ' total films...'
+      "placeholder": 'Search from ' + _vm.total.string + ' films and TV series...'
     },
     on: {
       "update-items": _vm.updateItems,
@@ -30689,74 +30732,102 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "inner"
-  }, [(_vm.film.title) ? _c('h2', [_vm._v(_vm._s(_vm.film.title))]) : _c('h2', [_vm._v("Add New Quote")]), _vm._v(" "), (_vm.film.description) ? _c('p', [_vm._v(_vm._s(_vm.film.description))]) : _vm._e(), _vm._v(" "), _vm._m(0)])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {}, [_c('section', [_c('form', {
+  }, [(_vm.film.title) ? _c('h2', [_vm._v(_vm._s(_vm.film.title))]) : _c('h2', [_vm._v("Add New Quote")]), _vm._v(" "), _c('p', [_vm._v("No need to log in to submit new quote. Write your favorite quotes from film and spread it to entire world.")]), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.film.description) ? _c('p', [_vm._v(_vm._s(_vm.film.description))]) : _vm._e(), _vm._v(" "), _c('div', {}, [_c('section', [_c('form', {
     attrs: {
       "method": "post",
-      "action": "/submit-spoiler"
+      "action": "/submit"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.create($event)
+      }
     }
-  }, [_c('div', {
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "name"
+    }
+  }, [_vm._v("Role Name")]), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.model.name),
+      expression: "model.name"
+    }],
+    attrs: {
+      "type": "text",
+      "name": "name",
+      "id": "name"
+    },
+    domProps: {
+      "value": (_vm.model.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.model.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "field"
+  }, [_c('label', {
+    attrs: {
+      "for": "quote"
+    }
+  }, [_vm._v("Message")]), _vm._v(" "), _c('textarea', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.model.quote),
+      expression: "model.quote"
+    }],
+    attrs: {
+      "name": "quote",
+      "id": "quote",
+      "rows": "5"
+    },
+    domProps: {
+      "value": (_vm.model.quote)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.model.quote = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('ul', {
+    staticClass: "actions"
+  }, [_c('li', [_c('button', {
+    staticClass: "button special",
+    attrs: {
+      "type": "submit"
+    }
+  }, [(_vm.loading) ? _c('i', {
+    staticClass: "fa fa-spin fa-spinner"
+  }) : _vm._e(), _vm._v(" Submit Quote\n            ")])]), _vm._v(" "), _vm._m(1)])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "field"
   }, [_c('label', {
     attrs: {
       "for": "title"
     }
-  }, [_vm._v("Title")]), _vm._v(" "), _c('input', {
+  }, [_vm._v("Movie or TV Series")]), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
       "type": "text",
       "placeholder": "Search film here..."
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field half first"
-  }, [_c('label', {
-    attrs: {
-      "for": "name"
-    }
-  }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "text",
-      "name": "name",
-      "id": "name"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field half"
-  }, [_c('label', {
-    attrs: {
-      "for": "email"
-    }
-  }, [_vm._v("Email")]), _vm._v(" "), _c('input', {
-    attrs: {
-      "type": "text",
-      "name": "email",
-      "id": "email"
-    }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "field"
-  }, [_c('label', {
-    attrs: {
-      "for": "message"
-    }
-  }, [_vm._v("Message")]), _vm._v(" "), _c('textarea', {
-    attrs: {
-      "name": "message",
-      "id": "message",
-      "rows": "5"
-    }
-  })]), _vm._v(" "), _c('ul', {
-    staticClass: "actions"
-  }, [_c('li', [_c('a', {
-    staticClass: "button submit special",
-    attrs: {
-      "href": ""
-    }
-  }, [_vm._v("Submit Quote")])]), _vm._v(" "), _c('li', [_c('button', {
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('li', [_c('button', {
     staticClass: "button",
     attrs: {
       "type": "reset"
     }
-  }, [_vm._v("Reset")])])])])])])
+  }, [_vm._v("Reset")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -30827,13 +30898,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "inner"
   }, [_c('nav', [_c('ul', [_vm._m(0), _vm._v(" "), _c('li', [_c('a', {
     attrs: {
-      "href": "#spoiler"
+      "href": "#quote"
     }
   }, [_vm._v("\n          Quote Me!"), _c('br'), _vm._v(" "), (_vm.film.title) ? _c('span', [_vm._v(_vm._s(_vm.film.title))]) : _vm._e()])]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {
-      "href": "#intro"
+      "href": "#search"
     }
   }, [_vm._v("Find a Movie")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -30845,7 +30916,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('li', [_c('a', {
     attrs: {
-      "href": "#submit-spoiler"
+      "href": "#submit"
     }
   }, [_vm._v("Submit Quote")])])
 }]}
