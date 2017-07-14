@@ -27,32 +27,54 @@
 				<navigation></navigation>
 			</section>
 
-			<!-- Wrapper <-->
+			<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Intro -->
-				<section id="search" class="wrapper style1 fullscreen fade-up">
+				<section id="intro" class="wrapper style1 fullscreen fade-up">
 					<film-search></film-search>
 				</section>
 
-				<!-- Two -->
+				<!-- Film and quotes -->
 				<section id="quote" class="wrapper style3 fade-up">
-					<film-spoiler></film-spoiler>
+					<film-quote></film-quote>
 				</section>
 
-				<!-- Latest -->
-				<film-latest></film-latest>
+				<!-- Latest films -->
+				<section id="latest" class="wrapper style2 spotlights">
+					@foreach ($films as $film)
+						<section>
+							<a href="{{ $film->film_url }}" class="image"><img src="{{ $film->poster_url }}" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>
+										{{ $film->title }}
+										@if ($film->year)
+											({{ $film->year }})
+										@endif
+									</h2>
+									<film-rate></film-rate>
+									<p>{{ str_limit($film->description, 100) }}</p>
+									<ul class="actions">
+										<li><a href="#" class="button special">View Quote ({{ $film->quotes_count }})</a></li>
+										<li><a href="{{ $film->film_url }}" class="button">View Film</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					@endforeach
+				</section>
 
-				<!-- Three -->
+				<!-- Submit quote -->
 				<section id="submit" class="wrapper style1 fade-up">
-					<form-spoiler></form-spoiler>
+					<form-quote></form-quote>
 				</section>
 
 			</div>
-		</div>
 
-		<!-- Footer -->
-		@include('layouts.partials.footer')
+			<!-- Footer -->
+			@include('layouts.partials.footer')
+		</div>
 
 		<!-- Scripts -->
 		<script src="{{ asset('js/app.js') }}"></script>

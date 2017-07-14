@@ -15,7 +15,15 @@ class FilmController extends Controller
 {
     public function index(): \Illuminate\View\View
     {
-        return view('movie.index');
+        $films = Film::take(3)
+            ->where('description', '!=', '')
+            ->where('poster', '!=', '')
+            ->where('is_adult', false)
+            ->inRandomOrder()
+            ->withCount('quotes')
+            ->get();
+
+        return view('film.index', compact('films'));
     }
 
     public function search(Request $request): \Illuminate\Http\JsonResponse
@@ -56,25 +64,12 @@ class FilmController extends Controller
 
         $this->fetchRest($film);
 
-        return view('movie.view', compact('film'));
+        return view('film.view', compact('film'));
     }
 
     public function random(): \Illuminate\View\View
     {
-        return view('movie.view', compact('movie'));
-    }
-
-    public function latest(): \Illuminate\Http\JsonResponse
-    {
-        $films = Film::take(3)
-            ->where('description', '!=', '')
-            ->where('poster', '!=', '')
-            ->where('is_adult', false)
-            ->inRandomOrder()
-            ->withCount('quotes')
-            ->get();
-
-        return response()->json($films);
+        return view('film.view', compact('film'));
     }
 
     public function total()

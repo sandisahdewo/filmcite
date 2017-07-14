@@ -2,7 +2,7 @@
   <div class="inner">
     <nav>
       <ul>
-        <li><a href="#search">Find a Movie</a></li>
+        <li><a href="#intro">Find a Movie</a></li>
         <li>
           <a href="#quote">
             Quote Me!<br>

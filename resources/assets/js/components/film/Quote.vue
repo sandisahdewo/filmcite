@@ -33,8 +33,8 @@
     </div>
     <ul class="actions">
       <li v-if="! isEmpty(quotes)"><a href="#" class="button special">Load more</a></li>
-      <li><a href="#submit-spoiler" class="button">
-        Submit spoiler for {{ film.title }}
+      <li><a href="#submit" class="button">
+        Submit Quote
       </a></li>
     </ul>
   </div>

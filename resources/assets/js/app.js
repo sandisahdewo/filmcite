@@ -27,10 +27,9 @@ import store from './vuex/store';
 
 Vue.component('navigation', require('./components/Navigation.vue'));
 Vue.component('film-search', require('./components/film/Search.vue'));
-Vue.component('film-spoiler', require('./components/film/Spoiler.vue'));
-Vue.component('film-latest', require('./components/film/Latest.vue'));
+Vue.component('film-quote', require('./components/film/Quote.vue'));
 Vue.component('film-rate', require('./components/film/Rate.vue'));
-Vue.component('form-spoiler', require('./components/film/Form.vue'));
+Vue.component('form-quote', require('./components/film/Form.vue'));
 
 const app = new Vue({
 	store,

@@ -17,7 +17,6 @@ Route::post('/submit', 'QuoteController@create')->name('quote.create');
 Route::get('/', 'FilmController@index')->name('film.index');
 Route::get('/search', 'FilmController@search')->name('film.search');
 Route::get('/random', 'FilmController@random')->name('film.random');
-Route::get('/latest', 'FilmController@latest')->name('film.latest');
 Route::get('/total', 'FilmController@total')->name('film.total');
 Route::get('/film/{id}', 'FilmController@show')->name('film.show');
 Route::get('/{slug}', 'FilmController@view')->name('film.view');
