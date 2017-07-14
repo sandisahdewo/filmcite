@@ -22,6 +22,7 @@ class Film extends Model
         'vote',
         'popularity',
         'video',
+        'type',
         'is_adult',
         'released_at',
     ];

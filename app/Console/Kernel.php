@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Film\Import::class,
+        \App\Console\Commands\Series\Import::class,
     ];
 
     /**
